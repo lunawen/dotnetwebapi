@@ -7,6 +7,7 @@ This is a simple project to use along with a dotnet web api deployment tutorial.
 ## Dev
 
 ```shell
+cd dotnetwebapi
 dotnet run
 ```
 
@@ -14,7 +15,6 @@ dotnet run
 
 Note: you can also use UI to create the folder.
 Please don't use the single file approach, we need the dll to make this work.
-
 
 ```shell
 dotnet publish --configuration Release -o published
@@ -26,4 +26,3 @@ dotnet publish --configuration Release -o published
 cd <publish-folder>
 dotnet app-name.dll
 ```
-
