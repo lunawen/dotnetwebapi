@@ -2,6 +2,8 @@
 
 This is a simple project to use along with a dotnet web api deployment tutorial.
 
+https://lunawen.com/devops/20220409-luna-tech-deploy-dotnet-webapi-ubuntu/
+
 # Commands
 
 ## Dev
