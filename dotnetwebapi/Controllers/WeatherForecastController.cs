@@ -1,6 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using dotnetwebapi.Data;
-using Microsoft.EntityFrameworkCore;
 
 namespace dotnetwebapi.Controllers;
 
@@ -8,17 +6,28 @@ namespace dotnetwebapi.Controllers;
 [Route("[controller]")]
 public class WeatherForecastController : ControllerBase
 {
-    private readonly WeatherDbContext _context;
-    public IEnumerable<WeatherForecast> WeatherForecasts { get; set; }
-
-    public WeatherForecastController(WeatherDbContext context)
+    private static readonly string[] Summaries = new[]
     {
-        _context = context;
+        "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
+    };
+
+    private readonly ILogger<WeatherForecastController> _logger;
+
+    public WeatherForecastController(ILogger<WeatherForecastController> logger)
+    {
+        _logger = logger;
     }
 
-    [HttpGet]
-    public async Task<ActionResult<IEnumerable<WeatherForecast>>> Get()
+    [HttpGet(Name = "GetWeatherForecast")]
+    public IEnumerable<WeatherForecast> Get()
     {
-        return await _context.WeatherForecasts.ToListAsync();
+        return Enumerable.Range(1, 5).Select(index => new WeatherForecast
+        {
+            Date = DateTime.Now.AddDays(index),
+            TemperatureC = Random.Shared.Next(-20, 55),
+            Summary = Summaries[Random.Shared.Next(Summaries.Length)]
+        })
+        .ToArray();
     }
 }
+
